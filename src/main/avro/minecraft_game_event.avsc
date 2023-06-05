@@ -1,0 +1,40 @@
+{
+  "type": "record",
+  "name": "GameEvent",
+  "namespace": "net.hcf.minecraft.game",
+  "fields": [
+    {
+      "name": "type",
+      "type": {
+        "type": "enum",
+        "name": "GameEventType",
+        "symbols": ["PlayerJoin", "PlayerQuit"]
+      }
+    },
+    {
+      "name": "urn",
+      "type": ["null", "string"],
+      "default": null
+    },
+    {
+      "name": "data",
+      "type": {
+        "type": "record",
+        "name": "GameEventData",
+        "fields": [
+          {
+            "name": "username",
+            "type": ["null", "string"],
+            "default": null
+          },
+          {
+            "name": "remoteAddress",
+            "type": ["null", "string"],
+            "default": null
+          }
+        ],
+        "default": {}
+      }
+    }
+  ]
+}
