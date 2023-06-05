@@ -12,9 +12,10 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import lombok.Getter;
-import lombok.Setter;
+import lombok.RequiredArgsConstructor;
 
 @Entity(name = "player")
+@RequiredArgsConstructor
 public class Player extends PanacheEntityBase {
 
   @Id
@@ -23,15 +24,22 @@ public class Player extends PanacheEntityBase {
   private UUID id;
 
   @Getter
-  @Setter
-  private String username;
+  private final String username;
 
   @Getter
-  @Setter
   @Column(name = "minecraft_id")
-  private UUID minecraftId;
+  private final UUID minecraftId;
 
   @Getter
   @OneToMany(cascade = CascadeType.ALL, mappedBy = "player")
-  private Set<PlayerConnectionHistory> connectionHistory;
+  private Set<PlayerConnectionHistory> connectionHistory = Set.of();
+
+  public Player() {
+    this.username = null;
+    this.minecraftId = null;
+  }
+
+  public static Player findByMinecraftId(UUID uuid) {
+    return find("minecraftId", uuid).firstResult();
+  }
 }

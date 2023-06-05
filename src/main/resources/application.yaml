@@ -9,4 +9,22 @@ quarkus:
       url: jdbc:postgresql://localhost:5432/postgres
   hibernate-orm:
     database:
-      generation: drop-and-create
+      generation: update
+
+kafka:
+  bootstrap:
+    servers: PLAINTEXT://localhost:9092
+
+mp:
+  messaging:
+    connector:
+      smallrye-kafka:
+        schema:
+          registry:
+            url: http://localhost:8081
+    incoming:
+      game-events-from-kafka:
+        connector: smallrye-kafka
+        topic: game-events
+        value:
+          deserializer: io.confluent.kafka.serializers.KafkaAvroDeserializer
