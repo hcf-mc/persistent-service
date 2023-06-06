@@ -23,7 +23,7 @@ mp:
           registry:
             url: http://localhost:8081
     incoming:
-      game-events-from-kafka:
+      game-events:
         connector: smallrye-kafka
         topic: game-events
         value:
