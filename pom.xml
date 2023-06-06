@@ -16,16 +16,6 @@
     <skipITs>true</skipITs>
     <surefire-plugin.version>3.0.0</surefire-plugin.version>
   </properties>
-  <repositories>
-    <!-- io.confluent:kafka-avro-serializer is only available from this repository: -->
-    <repository>
-        <id>confluent</id>
-        <url>https://packages.confluent.io/maven/</url>
-        <snapshots>
-            <enabled>false</enabled>
-        </snapshots>
-    </repository>
-  </repositories>
   <dependencyManagement>
     <dependencies>
       <dependency>
@@ -77,15 +67,19 @@
       <artifactId>quarkus-confluent-registry-avro</artifactId>
     </dependency>
     <dependency>
-        <groupId>io.confluent</groupId>
-        <artifactId>kafka-avro-serializer</artifactId>
-        <version>7.2.0</version>
-        <exclusions>
-            <exclusion>
-                <groupId>jakarta.ws.rs</groupId>
-                <artifactId>jakarta.ws.rs-api</artifactId>
-            </exclusion>
-        </exclusions>
+      <groupId>io.confluent</groupId>
+      <artifactId>kafka-avro-serializer</artifactId>
+      <version>7.2.0</version>
+      <exclusions>
+        <exclusion>
+          <groupId>jakarta.ws.rs</groupId>
+          <artifactId>jakarta.ws.rs-api</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <dependency>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-flyway</artifactId>
     </dependency>
     <dependency>
       <groupId>io.quarkus</groupId>
@@ -98,6 +92,15 @@
       <scope>test</scope>
     </dependency>
   </dependencies>
+  <repositories>
+    <repository>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+      <id>confluent</id>
+      <url>https://packages.confluent.io/maven/</url>
+    </repository>
+  </repositories>
   <build>
     <plugins>
       <plugin>

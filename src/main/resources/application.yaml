@@ -7,9 +7,9 @@ quarkus:
     password: postgres
     jdbc:
       url: jdbc:postgresql://localhost:5432/postgres
-  hibernate-orm:
-    database:
-      generation: update
+  flyway:
+    migrate-at-start: true
+    baseline-on-migrate: true
 
 kafka:
   bootstrap:
